@@ -20,9 +20,12 @@ RUN wget -qO /tmp/pb.zip https://github.com/pocketbase/pocketbase/releases/downl
     # Remove the zip file to reduce image size
     rm /tmp/pb.zip
 
+# Persist PocketBase data directory
+VOLUME ["/pb/pb_data"]
+
 # Expose the default PocketBase port
 EXPOSE 8080
 
 # Start PocketBase server on all network interfaces
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--dir=/pb/pb_data"]
 
